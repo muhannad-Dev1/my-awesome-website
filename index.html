@@ -3,816 +3,462 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الرهيب</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>MUFEED IT System</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading animations */
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-25%); }
-        }
-
-        /* Advanced animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes gradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes rotateIn {
-            from {
-                opacity: 0;
-                transform: rotate(-180deg) scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: rotate(0deg) scale(1);
-            }
-        }
-
-        /* Scroll-triggered animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-60px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(60px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .reveal-scale {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal-scale.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Parallax effect */
-        .parallax {
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Magnetic effect on hover */
-        .magnetic {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Gradient background */
-        .gradient-bg {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-
-        /* Text reveal effect */
-        .text-reveal {
-            overflow: hidden;
-        }
-
-        .text-reveal span {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(100%);
-            animation: textReveal 0.8s forwards;
-        }
-
-        @keyframes textReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Cursor follower */
-        .cursor-dot {
-            width: 12px;
-            height: 12px;
-            background: linear-gradient(45deg, #a855f7, #ec4899);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
-        }
-
-        /* Hover effects */
-        .hover-lift {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 25px 50px rgba(168, 85, 247, 0.4);
-        }
-
-        /* Advanced menu item animations */
-        .nav-btn {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-btn::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #a855f7, #ec4899);
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-btn:hover::before {
-            width: 100%;
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-3px);
-        }
-
-        .nav-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(168, 85, 247, 0.2), transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .nav-btn:hover::after {
-            opacity: 1;
-        }
-
-        /* Card tilt effect */
-        .tilt-card {
-            transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .tilt-card:hover {
-            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.05);
-        }
-
-        /* Glow effect on hover */
-        .glow-on-hover {
-            position: relative;
-        }
-
-        .glow-on-hover::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg, #a855f7, #ec4899, #8b5cf6, #a855f7);
-            background-size: 300% 300%;
-            border-radius: inherit;
-            opacity: 0;
-            transition: opacity 0.5s;
-            animation: gradient 3s ease infinite;
-            z-index: -1;
-            filter: blur(20px);
-        }
-
-        .glow-on-hover:hover::before {
-            opacity: 1;
-        }
-
-        /* Bounce on hover */
-        .bounce-hover {
-            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .bounce-hover:hover {
-            transform: scale(1.1);
-            animation: bounce-subtle 0.6s ease;
-        }
-
-        @keyframes bounce-subtle {
-            0%, 100% { transform: scale(1.1) translateY(0); }
-            50% { transform: scale(1.15) translateY(-10px); }
-        }
-
-        /* Shimmer effect */
-        .shimmer {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shimmer::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s;
-        }
-
-        .shimmer:hover::after {
-            left: 100%;
-        }
-
-        /* Pulse glow */
-        .pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(168, 85, 247, 0.6), 0 0 60px rgba(236, 72, 153, 0.4);
-            }
-        }
-
-        /* Image reveal on scroll */
-        .image-reveal {
-            overflow: hidden;
-            position: relative;
-        }
-
-        .image-reveal::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #a855f7, #ec4899);
-            transform: translateX(-100%);
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .image-reveal.active::after {
-            transform: translateX(100%);
-        }
-
-        /* Smooth page transitions */
-        .page-content {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #a855f7, #ec4899);
-            border-radius: 10px;
-        }
-
-        /* Animated gradient text */
-        .gradient-text {
-            background: linear-gradient(90deg, #a855f7, #ec4899, #8b5cf6, #a855f7);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradient 3s ease infinite;
-        }
-
-        /* Stagger animation delays */
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-        .stagger-6 { animation-delay: 0.6s; }
-
-        /* Glitch effect on hover */
-        .glitch {
-            position: relative;
-        }
-
-        .glitch:hover::before,
-        .glitch:hover::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch:hover::before {
-            animation: glitch 0.3s infinite;
-            color: #ff00ff;
-            z-index: -1;
-        }
-
-        .glitch:hover::after {
-            animation: glitch 0.3s infinite reverse;
-            color: #00ffff;
-            z-index: -2;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        /* Liquid button effect */
-        .liquid-button {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .liquid-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .liquid-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .hidden { display: none; }
+        :root {
+            --brand-purple: #744394; /* لون الشعار البنفسجي */
+            --brand-grey: #525252;   /* لون الشعار الرمادي */
+            --bg-light: #f3f4f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg-light); color: var(--brand-grey); }
+
+        /* الشعار */
+        .logo-container { text-align: center; margin-bottom: 2rem; }
+        .logo-svg { height: 60px; width: auto; }
+
+        /* شاشة الدخول */
+        .login-page { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: white; }
+        .login-card { background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); width: 100%; max-width: 450px; border-top: 5px solid var(--brand-purple); }
+        
+        .input-group { margin-bottom: 1.5rem; text-align: right; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--brand-purple); }
+        .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 0.85rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: 0.3s; }
+        .input-group input:focus { border-color: var(--brand-purple); outline: none; }
+
+        .btn { padding: 0.85rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .btn-login { width: 100%; background: var(--brand-purple); color: white; }
+        .btn-login:hover { background: #5e357a; }
+        
+        .btn-primary { background: var(--brand-purple); color: white; }
+        .btn-danger { background: #ef4444; color: white; font-size: 0.9rem; padding: 0.5rem 1rem; }
+        .btn-success { background: #10b981; color: white; }
+        .btn-edit { background: #f59e0b; color: white; font-size: 0.9rem; padding: 0.5rem 1rem; }
+
+        .message { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: none; text-align: center; }
+        .message.error { background: #fee2e2; color: #991b1b; }
+        .message.success { background: #d1fae5; color: #065f46; }
+
+        /* التطبيق الرئيسي */
+        .app-container { display: none; min-height: 100vh; }
+        .app-header { background: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-bottom: 3px solid var(--brand-purple); }
+        
+        .header-logo { height: 40px; }
+        
+        .content { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        .nav-bar { display: flex; gap: 0.5rem; background: white; padding: 0.5rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .nav-btn { padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; background: transparent; font-weight: bold; color: var(--brand-grey); }
+        .nav-btn.active { background: var(--brand-purple); color: white; }
+
+        .page-section { display: none; animation: fadeIn 0.3s ease; }
+        .page-section.active { display: block; }
+
+        .card { background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 2rem; }
+        
+        /* الجدول */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95rem; }
+        .data-table th { background: #f8fafc; color: var(--brand-purple); padding: 1rem; text-align: right; border-bottom: 2px solid #e2e8f0; }
+        .data-table td { padding: 1rem; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .actions-cell { display: flex; gap: 5px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* الشعار SVG */
+        .logo-svg path { fill: none; stroke: var(--brand-purple); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .logo-text { fill: var(--brand-grey); font-family: sans-serif; font-weight: bold; letter-spacing: 2px; }
     </style>
 </head>
-<body class="bg-black text-white">
-    
-    <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
+<body>
 
-    <!-- Loading Screen -->
-    <div id="loading" class="fixed inset-0 gradient-bg flex items-center justify-center z-50">
-        <div class="text-center">
-            <div class="relative">
-                <div class="w-32 h-32 border-8 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
-                <div class="text-6xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">✨</div>
-            </div>
-            <h2 class="text-4xl font-bold text-white mt-8 animate-pulse">جاري التحميل...</h2>
-            <div class="flex gap-2 justify-center mt-4">
-                <div class="w-3 h-3 bg-white rounded-full animate-bounce"></div>
-                <div class="w-3 h-3 bg-white rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
-                <div class="w-3 h-3 bg-white rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
-            </div>
+    <div id="loginPage" class="login-page">
+        <div class="logo-container">
+            <svg class="logo-svg" viewBox="0 0 200 60" xmlns="images/WhatsApp Image 2025-12-22 at 3.37.15 PM.jpeg" style="width: 220px; height: auto;">
+                <path d="M10 10 L40 50 L70 10 M10 10 L40 30 L70 10 M10 10 V40 M70 10 V40" stroke="#744394" fill="none" stroke-width="3"/>
+                <text x="85" y="42" font-size="38" class="logo-text">MUFEED</text>
+            </svg>
         </div>
+
+        <div class="login-card">
+            <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--brand-grey);">تسجيل الدخول للنظام</h2>
+            <div id="loginMsg" class="message"></div>
+            <form id="loginFormElement">
+                <div class="input-group">
+                    <label>اسم المستخدم</label>
+                    <input type="text" id="usernameInput" required placeholder="">
+                </div>
+                <div class="input-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="passwordInput" required placeholder="">
+                </div>
+                <button type="submit" class="btn btn-login">دخول</button>
+            </form>
+        </div>
+        <p style="margin-top: 2rem; color: #9ca3af; font-size: 0.9rem;">MUFEED IT Support System v2.0</p>
     </div>
 
-    <!-- Video Background -->
-    <div class="fixed inset-0 z-0">
-        <div class="absolute inset-0 bg-black/70 z-10"></div>
-        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-40">
-            <source src="https://cdn.coverr.co/videos/coverr-abstract-colorful-gradient-background-7525/1080p.mp4" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-transparent to-black z-10"></div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-xl border-b border-white/10 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <h1 class="text-3xl font-black gradient-text">
-                موقعي
-            </h1>
-            
-            <div class="hidden md:flex gap-8">
-                <button onclick="changePage('home')" class="nav-btn shimmer bounce-hover relative group px-5 py-2 font-bold text-lg transition-all">
-                    <span class="relative z-10">🏠 الرئيسية</span>
-                </button>
-                <button onclick="changePage('about')" class="nav-btn shimmer bounce-hover relative group px-5 py-2 font-bold text-lg transition-all">
-                    <span class="relative z-10">ℹ️ من نحن</span>
-                </button>
-                <button onclick="changePage('services')" class="nav-btn shimmer bounce-hover relative group px-5 py-2 font-bold text-lg transition-all">
-                    <span class="relative z-10">💼 خدماتنا</span>
-                </button>
-                <button onclick="changePage('contact')" class="nav-btn shimmer bounce-hover relative group px-5 py-2 font-bold text-lg transition-all">
-                    <span class="relative z-10">✉️ اتصل بنا</span>
-                </button>
-            </div>
-
-            <button onclick="toggleMenu()" class="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    <div id="mainApplication" class="app-container">
+        <div class="app-header">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <svg viewBox="0 0 200 60" style="height: 35px;">
+                    <path d="M10 10 L40 50 L70 10 M10 10 L40 30 L70 10 M10 10 V40 M70 10 V40" stroke="#744394" fill="none" stroke-width="4"/>
+                    <text x="85" y="45" font-size="40" fill="#525252" font-weight="bold" font-family="sans-serif">MUFEED</text>
                 </svg>
-            </button>
+                <span style="height: 25px; width: 1px; background: #ddd; margin: 0 10px;"></span>
+                <h3 style="color: var(--brand-purple);">نظام الدعم الفني</h3>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="text-align: left;">
+                    <div id="displayUsername" style="font-weight: bold;"></div>
+                    <div id="displayRole" style="font-size: 0.8rem; color: #6b7280;"></div>
+                </div>
+                <button onclick="logout()" class="btn btn-danger">خروج</button>
+            </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-lg border-t border-white/10">
-            <button onclick="changePage('home')" class="w-full px-6 py-4 text-right hover:bg-white/10 transition-colors font-bold">🏠 الرئيسية</button>
-            <button onclick="changePage('about')" class="w-full px-6 py-4 text-right hover:bg-white/10 transition-colors font-bold">ℹ️ من نحن</button>
-            <button onclick="changePage('services')" class="w-full px-6 py-4 text-right hover:bg-white/10 transition-colors font-bold">💼 خدماتنا</button>
-            <button onclick="changePage('contact')" class="w-full px-6 py-4 text-right hover:bg-white/10 transition-colors font-bold">✉️ اتصل بنا</button>
+        <div class="content">
+            <div class="nav-bar">
+                <button class="nav-btn active" onclick="nav('search', this)">🔍 البحث الذكي</button>
+                <button class="nav-btn" onclick="nav('add', this)">➕ إضافة مشكلة</button>
+                <button class="nav-btn" onclick="nav('browse', this)">📂 قاعدة المعرفة</button>
+                <button class="nav-btn" id="adminBtn" onclick="nav('admin', this)" style="display:none;">⚙️ لوحة التحكم</button>
+            </div>
+
+            <div id="searchSection" class="page-section active">
+                <div class="card">
+                    <h2 style="color: var(--brand-purple); margin-bottom: 1rem;">البحث بالذكاء الاصطناعي</h2>
+                    <div class="input-group">
+                        <input type="text" id="aiInput" placeholder="اشرح المشكلة هنا (مثال: الطابعة لا تعمل أو النت مقطوع)..." style="padding: 1.2rem;">
+                    </div>
+                    <button class="btn btn-primary" onclick="searchAI()" style="width: 100%;">تحليل وبحث</button>
+                    <div id="searchResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+
+            <div id="addSection" class="page-section">
+                <div class="card">
+                    <h2 style="color: var(--brand-purple); margin-bottom: 1rem;">توثيق حل جديد</h2>
+                    <form id="addIssueForm">
+                        <div class="input-group">
+                            <label>عنوان / وصف المشكلة</label>
+                            <input type="text" id="newDesc" required>
+                        </div>
+                        <div class="input-group">
+                            <label>التصنيف</label>
+                            <select id="newCat">
+                                <option>Domain & AD</option>
+                                <option>Network & Internet</option>
+                                <option>Hardware & Printers</option>
+                                <option>Software & Office</option>
+                                <option>Email & Outlook</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>خطوات الحل (بالتفصيل)</label>
+                            <textarea id="newSol" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">حفظ في قاعدة البيانات</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="browseSection" class="page-section">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h2 style="color: var(--brand-purple);">جميع المشاكل والحلول</h2>
+                        <button onclick="exportToExcel()" class="btn btn-success">📊 تصدير إلى Excel</button>
+                    </div>
+                    <div id="browseList"></div>
+                </div>
+            </div>
+
+            <div id="adminSection" class="page-section">
+                <div class="card">
+                    <h3 style="color: var(--brand-purple); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 1rem;">🛠️ إدارة قاعدة البيانات</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>التصنيف</th>
+                                    <th>المشكلة</th>
+                                    <th>أضيف بواسطة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminIssuesTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--brand-purple); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 1rem;">👥 إدارة المستخدمين والصلاحيات</h3>
+                    
+                    <div style="background: #f9f9f9; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                        <h4 style="margin-bottom: 1rem;">إضافة مستخدم جديد</h4>
+                        <form id="addUserForm" style="display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap;">
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.9rem;">اسم المستخدم</label>
+                                <input type="text" id="newUsername" required style="width: 100%; padding: 0.5rem;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.9rem;">كلمة المرور</label>
+                                <input type="text" id="newPassword" required style="width: 100%; padding: 0.5rem;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.9rem;">الصلاحية</label>
+                                <select id="newRole" style="width: 100%; padding: 0.5rem;">
+                                    <option value="user">موظف (User)</option>
+                                    <option value="admin">مدير (Admin)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">إضافة</button>
+                        </form>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>اسم المستخدم</th>
+                                <th>الصلاحية</th>
+                                <th>كلمة المرور</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminUsersTable"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </nav>
-
-    <!-- Page Content -->
-    <div class="relative z-20 pt-20">
-        
-        <!-- Home Page -->
-        <div id="page-home" class="page-content">
-            <!-- Hero Section -->
-            <section class="images/WhatsApp Image 2025-12-22 at 3.37.15 PM.jpeg">
-                <div class="max-w-7xl mx-auto text-center">
-                    <div class="text-reveal mb-6">
-                        <h1 class="text-7xl md:text-9xl font-black">
-                            <span class="gradient-text">مرحباً بكم</span>
-                        </h1>
-                    </div>
-                    <p class="reveal text-2xl md:text-4xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-                        نصنع تجارب رقمية استثنائية تترك أثراً لا يُنسى
-                    </p>
-                    <button class="reveal liquid-button relative px-12 py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-bold text-xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
-                        <span class="relative z-10">ابدأ رحلتك معنا</span>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Features Section -->
-            <section class="min-h-screen flex items-center px-6 py-20">
-                <div class="max-w-7xl mx-auto w-full">
-                    <h2 class="reveal text-6xl md:text-8xl font-black text-center mb-20">
-                        <span class="gradient-text">لماذا نحن مميزون</span>
-                    </h2>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="reveal-left hover-lift tilt-card glow-on-hover p-10 rounded-3xl bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">⚡</div>
-                            <h3 class="text-3xl font-bold mb-4">سرعة خيالية</h3>
-                            <p class="text-gray-400 text-lg leading-relaxed">أداء فائق يضمن تجربة سلسة لا مثيل لها</p>
-                        </div>
-                        <div class="reveal hover-lift tilt-card glow-on-hover p-10 rounded-3xl bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">🎨</div>
-                            <h3 class="text-3xl font-bold mb-4">تصميم مبتكر</h3>
-                            <p class="text-gray-400 text-lg leading-relaxed">واجهات عصرية تجمع بين الجمال والوظيفة</p>
-                        </div>
-                        <div class="reveal-right hover-lift tilt-card glow-on-hover p-10 rounded-3xl bg-gradient-to-br from-pink-900/30 to-orange-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">🚀</div>
-                            <h3 class="text-3xl font-bold mb-4">تقنية متقدمة</h3>
-                            <p class="text-gray-400 text-lg leading-relaxed">نستخدم أحدث التقنيات لضمان التفوق</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Portfolio Section -->
-            <section class="min-h-screen flex items-center px-6 py-20">
-                <div class="max-w-7xl mx-auto w-full">
-                    <h2 class="reveal text-6xl md:text-8xl font-black text-center mb-20">
-                        <span class="gradient-text">أعمالنا</span>
-                    </h2>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="reveal-scale image-reveal group relative overflow-hidden rounded-3xl h-96 bg-gradient-to-br from-purple-600/20 to-pink-600/20 hover:scale-105 transition-transform duration-500">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="text-center">
-                                    <div class="text-8xl mb-4 group-hover:scale-110 transition-transform">💎</div>
-                                    <h3 class="text-3xl font-bold">مشروع رائع</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="reveal-scale image-reveal group relative overflow-hidden rounded-3xl h-96 bg-gradient-to-br from-blue-600/20 to-purple-600/20 hover:scale-105 transition-transform duration-500">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="text-center">
-                                    <div class="text-8xl mb-4 group-hover:scale-110 transition-transform">🎯</div>
-                                    <h3 class="text-3xl font-bold">مشروع متميز</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- About Page -->
-        <div id="page-about" class="page-content hidden">
-            <section class="min-h-screen flex items-center px-6 py-20">
-                <div class="max-w-5xl mx-auto">
-                    <h2 class="reveal text-6xl md:text-8xl font-black text-center mb-16">
-                        <span class="gradient-text">من نحن</span>
-                    </h2>
-                    <div class="reveal bg-gradient-to-br from-purple-900/20 to-pink-900/20 backdrop-blur-sm border border-white/10 rounded-3xl p-12">
-                        <p class="text-2xl md:text-3xl text-gray-200 leading-relaxed mb-12 text-center">
-                            نحن فريق من المبدعين والمبتكرين الذين يؤمنون بقوة التصميم الجيد والتكنولوجيا المتقدمة في صنع الفارق
-                        </p>
-                        <div class="grid md:grid-cols-3 gap-8 mt-16">
-                            <div class="reveal-left text-center p-8 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                                <div class="text-6xl mb-4">🎯</div>
-                                <h3 class="text-2xl font-bold mb-3">رؤيتنا</h3>
-                                <p class="text-gray-400">قيادة التحول الرقمي</p>
-                            </div>
-                            <div class="reveal text-center p-8 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                                <div class="text-6xl mb-4">💡</div>
-                                <h3 class="text-2xl font-bold mb-3">مهمتنا</h3>
-                                <p class="text-gray-400">ابتكار حلول مميزة</p>
-                            </div>
-                            <div class="reveal-right text-center p-8 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                                <div class="text-6xl mb-4">⭐</div>
-                                <h3 class="text-2xl font-bold mb-3">قيمنا</h3>
-                                <p class="text-gray-400">التميز والإبداع</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Services Page -->
-        <div id="page-services" class="page-content hidden">
-            <section class="min-h-screen px-6 py-20">
-                <div class="max-w-7xl mx-auto">
-                    <h2 class="reveal text-6xl md:text-8xl font-black text-center mb-20">
-                        <span class="gradient-text">خدماتنا</span>
-                    </h2>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="reveal hover-lift tilt-card glow-on-hover shimmer stagger-1 p-10 rounded-3xl bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">🌐</div>
-                            <h3 class="text-2xl font-bold mb-4">تطوير المواقع</h3>
-                            <p class="text-gray-400 leading-relaxed">مواقع احترافية بأحدث التقنيات</p>
-                        </div>
-                        <div class="reveal hover-lift tilt-card glow-on-hover shimmer stagger-2 p-10 rounded-3xl bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">🎨</div>
-                            <h3 class="text-2xl font-bold mb-4">تصميم UI/UX</h3>
-                            <p class="text-gray-400 leading-relaxed">تجربة مستخدم استثنائية</p>
-                        </div>
-                        <div class="reveal hover-lift tilt-card glow-on-hover shimmer stagger-3 p-10 rounded-3xl bg-gradient-to-br from-pink-900/30 to-orange-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">📱</div>
-                            <h3 class="text-2xl font-bold mb-4">تطبيقات الموبايل</h3>
-                            <p class="text-gray-400 leading-relaxed">تطبيقات متقدمة لجميع المنصات</p>
-                        </div>
-                        <div class="reveal hover-lift tilt-card glow-on-hover shimmer stagger-4 p-10 rounded-3xl bg-gradient-to-br from-green-900/30 to-blue-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">💡</div>
-                            <h3 class="text-2xl font-bold mb-4">الاستشارات</h3>
-                            <p class="text-gray-400 leading-relaxed">استراتيجيات مبتكرة للنجاح</p>
-                        </div>
-                        <div class="reveal hover-lift tilt-card glow-on-hover shimmer stagger-5 p-10 rounded-3xl bg-gradient-to-br from-yellow-900/30 to-red-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">📈</div>
-                            <h3 class="text-2xl font-bold mb-4">التسويق الرقمي</h3>
-                            <p class="text-gray-400 leading-relaxed">وصول أوسع لجمهورك</p>
-                        </div>
-                        <div class="reveal hover-lift tilt-card glow-on-hover shimmer stagger-6 p-10 rounded-3xl bg-gradient-to-br from-red-900/30 to-purple-900/30 backdrop-blur-sm border border-white/10">
-                            <div class="text-7xl mb-6 bounce-hover inline-block">🔒</div>
-                            <h3 class="text-2xl font-bold mb-4">الأمن السيبراني</h3>
-                            <p class="text-gray-400 leading-relaxed">حماية شاملة لبياناتك</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Contact Page -->
-        <div id="page-contact" class="page-content hidden">
-            <section class="min-h-screen flex items-center px-6 py-20">
-                <div class="max-w-3xl mx-auto w-full">
-                    <h2 class="reveal text-6xl md:text-8xl font-black text-center mb-16">
-                        <span class="gradient-text">تواصل معنا</span>
-                    </h2>
-                    <div class="reveal bg-gradient-to-br from-purple-900/20 to-pink-900/20 backdrop-blur-sm border border-white/10 rounded-3xl p-12">
-                        <div class="space-y-8">
-                            <div class="reveal-left">
-                                <label class="block text-xl font-bold mb-3">الاسم</label>
-                                <input type="text" class="w-full px-6 py-4 bg-white/5 border border-white/20 rounded-2xl focus:outline-none focus:border-purple-500 transition-all text-white text-lg" placeholder="اسمك الكريم">
-                            </div>
-                            <div class="reveal-right">
-                                <label class="block text-xl font-bold mb-3">البريد الإلكتروني</label>
-                                <input type="email" class="w-full px-6 py-4 bg-white/5 border border-white/20 rounded-2xl focus:outline-none focus:border-purple-500 transition-all text-white text-lg" placeholder="email@example.com">
-                            </div>
-                            <div class="reveal-left">
-                                <label class="block text-xl font-bold mb-3">الرسالة</label>
-                                <textarea rows="6" class="w-full px-6 py-4 bg-white/5 border border-white/20 rounded-2xl focus:outline-none focus:border-purple-500 transition-all text-white text-lg resize-none" placeholder="اكتب رسالتك هنا..."></textarea>
-                            </div>
-                            <button class="reveal liquid-button w-full py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
-                                <span class="relative z-10">إرسال الرسالة</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
     </div>
 
     <script>
-        // Hide loading screen
-        setTimeout(() => {
-            document.getElementById('loading').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
-            }, 500);
-        }, 2000);
+        // ================= التهيئة والبيانات =================
+        
+        // التحقق من وجود بيانات سابقة أو إنشاء بيانات افتراضية
+        let usersDB = JSON.parse(localStorage.getItem('mufeedUsers')) || [
+            { id: 1, user: 'admin', pass: 'admin123', role: 'admin' },
+            { id: 2, user: 'user1', pass: '1234', role: 'user' }
+        ];
 
-        // Custom cursor
-        const cursorDot = document.querySelector('.cursor-dot');
+        let issuesDB = JSON.parse(localStorage.getItem('mufeedIssues')) || [
+            { id: 101, cat: 'Domain & AD', desc: 'الحساب مغلق (Locked Out)', sol: 'الدخول على AD والبحث عن اليوزر واختيار Unlock Account', by: 'admin' },
+            { id: 102, cat: 'Hardware', desc: 'الطابعة لا تستجيب', sol: 'التحقق من الكيبل واعادة تشغيل خدمة Print Spooler', by: 'user1' }
+        ];
 
-        window.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
-        });
+        let currentUser = null;
 
-        // Scale cursor on button hover
-        document.querySelectorAll('.liquid-button, .nav-btn, .hover-lift').forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                cursorDot.style.transform = 'scale(2)';
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                cursorDot.style.transform = 'scale(1)';
-            });
-        });
+        // دالة الحفظ
+        function saveData() {
+            localStorage.setItem('mufeedUsers', JSON.stringify(usersDB));
+            localStorage.setItem('mufeedIssues', JSON.stringify(issuesDB));
+        }
 
-        // Scroll reveal animations
-        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .image-reveal');
+        // ================= نظام الدخول =================
 
-        const revealOnScroll = () => {
-            revealElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
+        document.getElementById('loginFormElement').onsubmit = function(e) {
+            e.preventDefault();
+            const u = document.getElementById('usernameInput').value.trim();
+            const p = document.getElementById('passwordInput').value.trim();
+            const msg = document.getElementById('loginMsg');
 
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('active');
-                }
-            });
+            const foundUser = usersDB.find(usr => usr.user === u && usr.pass === p);
+
+            if (foundUser) {
+                currentUser = foundUser;
+                enterSystem();
+            } else {
+                msg.textContent = 'خطأ في اسم المستخدم أو كلمة المرور';
+                msg.className = 'message error show';
+            }
         };
 
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Initial check
-
-        // Parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.parallax');
+        function enterSystem() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainApplication').style.display = 'block';
+            document.getElementById('displayUsername').textContent = currentUser.user;
+            document.getElementById('displayRole').textContent = currentUser.role === 'admin' ? 'مدير النظام' : 'دعم فني';
             
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-
-            // Navbar background on scroll
-            const navbar = document.getElementById('navbar');
-            if (scrolled > 50) {
-                navbar.style.background = 'rgba(0, 0, 0, 0.8)';
-            } else {
-                navbar.style.background = 'rgba(0, 0, 0, 0.3)';
+            // إظهار زر الإدارة فقط للأدمن
+            if (currentUser.role === 'admin') {
+                document.getElementById('adminBtn').style.display = 'block';
             }
-        });
 
-        // Text reveal animation
-        const textReveal = document.querySelectorAll('.text-reveal h1');
-        textReveal.forEach(element => {
-            const text = element.textContent;
-            element.innerHTML = '';
-            text.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                span.textContent = char;
-                span.style.animationDelay = `${index * 0.05}s`;
-                element.appendChild(span);
-            });
-        });
-
-        // Page navigation
-        function changePage(page) {
-            document.querySelectorAll('.page-content').forEach(p => {
-                p.classList.add('hidden');
-            });
-            
-            document.getElementById('page-' + page).classList.remove('hidden');
-            document.getElementById('mobile-menu').classList.add('hidden');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Re-trigger animations
-            setTimeout(() => {
-                revealOnScroll();
-            }, 100);
+            renderBrowse();
         }
 
-        // Toggle mobile menu
-        function toggleMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        function logout() {
+            location.reload();
         }
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+        // ================= التنقل =================
 
-        // Add stagger delays to elements
-        document.querySelectorAll('.reveal').forEach((element, index) => {
-            element.style.transitionDelay = `${index * 0.1}s`;
-        });
+        function nav(sectionId, btn) {
+            document.querySelectorAll('.page-section').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(sectionId+'Section').classList.add('active');
+            btn.classList.add('active');
+
+            if(sectionId === 'browse') renderBrowse();
+            if(sectionId === 'admin') renderAdmin();
+        }
+
+        // ================= الوظائف الأساسية =================
+
+        // 1. البحث
+        function searchAI() {
+            const query = document.getElementById('aiInput').value.toLowerCase();
+            const container = document.getElementById('searchResults');
+            
+            if(!query) return;
+
+            const results = issuesDB.filter(item => 
+                item.desc.toLowerCase().includes(query) || 
+                item.sol.toLowerCase().includes(query) ||
+                item.cat.toLowerCase().includes(query)
+            );
+
+            if(results.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#888;">لم يتم العثور على حلول مشابهة. حاول إضافة هذه المشكلة لقاعدة البيانات.</p>';
+            } else {
+                container.innerHTML = results.map(item => `
+                    <div style="background:#f9fafb; border-right:4px solid var(--brand-purple); padding:1rem; margin-bottom:1rem; border-radius:8px;">
+                        <div style="font-weight:bold; color:var(--brand-purple);">${item.cat}</div>
+                        <div style="font-size:1.1rem; margin:5px 0;">${item.desc}</div>
+                        <div style="background:white; padding:10px; margin-top:10px; border-radius:6px; border:1px solid #eee;">
+                            <strong>الحل المقترح:</strong><br>
+                            ${item.sol}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // 2. إضافة مشكلة
+        document.getElementById('addIssueForm').onsubmit = function(e) {
+            e.preventDefault();
+            const newIssue = {
+                id: Date.now(),
+                desc: document.getElementById('newDesc').value,
+                cat: document.getElementById('newCat').value,
+                sol: document.getElementById('newSol').value,
+                by: currentUser.user
+            };
+            issuesDB.push(newIssue);
+            saveData();
+            alert('✅ تم حفظ المشكلة والحل بنجاح');
+            this.reset();
+        };
+
+        // 3. التصفح
+        function renderBrowse() {
+            const list = document.getElementById('browseList');
+            list.innerHTML = issuesDB.map(item => `
+                <div style="background:white; border-bottom:1px solid #eee; padding:1.5rem 0;">
+                    <span style="background:#f3e8ff; color:var(--brand-purple); padding:2px 10px; border-radius:20px; font-size:0.8rem;">${item.cat}</span>
+                    <h3 style="margin:10px 0;">${item.desc}</h3>
+                    <p style="color:#4b5563; white-space:pre-wrap;">${item.sol}</p>
+                    <div style="font-size:0.8rem; color:#9ca3af; margin-top:5px;">بواسطة: ${item.by}</div>
+                </div>
+            `).join('');
+        }
+
+        // 4. التصدير لإكسل
+        function exportToExcel() {
+            // إضافة BOM لضمان ظهور اللغة العربية بشكل صحيح
+            let csvContent = "\uFEFF"; 
+            csvContent += "المعرف,التصنيف,وصف المشكلة,الحل,بواسطة\n";
+
+            issuesDB.forEach(row => {
+                // تنظيف النصوص من الفواصل لتجنب كسر ملف CSV
+                let cleanDesc = row.desc.replace(/,/g, " ");
+                let cleanSol = row.sol.replace(/,/g, " - ").replace(/\n/g, " ");
+                csvContent += `${row.id},${row.cat},${cleanDesc},${cleanSol},${row.by}\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "Mufeed_Data_Export.csv";
+            link.click();
+        }
+
+        // ================= لوحة التحكم =================
+
+        function renderAdmin() {
+            // جدول المشاكل
+            const issueTbody = document.getElementById('adminIssuesTable');
+            issueTbody.innerHTML = issuesDB.map((item, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.cat}</td>
+                    <td>${item.desc}</td>
+                    <td>${item.by}</td>
+                    <td>
+                        <button onclick="deleteIssue(${item.id})" class="btn btn-danger">حذف</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            // جدول المستخدمين
+            const userTbody = document.getElementById('adminUsersTable');
+            userTbody.innerHTML = usersDB.map(u => `
+                <tr>
+                    <td>${u.user}</td>
+                    <td>
+                        <span style="padding:2px 8px; border-radius:10px; background:${u.role==='admin'?'#fef3c7':'#dbeafe'}; color:${u.role==='admin'?'#92400e':'#1e40af'}">
+                            ${u.role}
+                        </span>
+                    </td>
+                    <td>***</td>
+                    <td>
+                        ${u.user !== 'admin' ? `<button onclick="deleteUser(${u.id})" class="btn btn-danger">حذف</button>` : '<small>غير قابل للحذف</small>'}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // حذف مشكلة
+        window.deleteIssue = function(id) {
+            if(confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+                issuesDB = issuesDB.filter(i => i.id !== id);
+                saveData();
+                renderAdmin();
+            }
+        };
+
+        // إضافة مستخدم
+        document.getElementById('addUserForm').onsubmit = function(e) {
+            e.preventDefault();
+            const u = document.getElementById('newUsername').value;
+            const p = document.getElementById('newPassword').value;
+            const r = document.getElementById('newRole').value;
+
+            // التحقق من عدم التكرار
+            if(usersDB.find(x => x.user === u)) {
+                alert('اسم المستخدم موجود مسبقاً!');
+                return;
+            }
+
+            usersDB.push({ id: Date.now(), user: u, pass: p, role: r });
+            saveData();
+            renderAdmin();
+            this.reset();
+        };
+
+        // حذف مستخدم
+        window.deleteUser = function(id) {
+            if(confirm('هل أنت متأكد من حذف هذا المستخدم؟ سيتم منعه من الدخول.')) {
+                usersDB = usersDB.filter(u => u.id !== id);
+                saveData();
+                renderAdmin();
+            }
+        };
+
     </script>
-
 </body>
 </html>
